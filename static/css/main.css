@@ -11,6 +11,7 @@ form.login_css {
 {
      margin: 0 auto;
      width:1800px;
+
 }
 
 body {
@@ -75,6 +76,7 @@ div[class*="span"] {
   -o-transition: all .4s linear;
   -ms-transition: all .4s linear;
   transition: all .4s linear;
+
 }
 /*--------------------------------------------------------------------------
 	Typography Style
@@ -2455,6 +2457,7 @@ span.color-red {
 .mainmenu .mainmenu-submenu-inner > div {
   width: 33%;
   float: left;
+
 }
 .mainmenu .mainmenu-submenu-inner:before,
 .mainmenu .mainmenu-submenu-inner:after {
@@ -2681,4 +2684,8 @@ span.color-red {
 }
 .dropdown.open a.dropdown-toggle .caret {
   border-top: 4px solid #FFF;
+}
+
+.center_txt {
+text-align : center; /* задаём выравнивание текста по центру */
 }

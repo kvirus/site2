@@ -34,6 +34,10 @@ def base(request):
 def rules(request):
     return render(request, 'sites/rules.html')
 
+def info(request):
+    return render(request, 'sites/info.html')
+
+
 def open_1c (request): #Открыть правило для 1С SQL снаружи
     try:
         client.connect(hostname='10.100.2.1', port=6666, username="bka", password=passwd, look_for_keys=False,

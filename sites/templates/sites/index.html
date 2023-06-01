@@ -1,10 +1,21 @@
 {% extends 'sites/base.html' %}
 
 {% block menu %}
-
+	<li class="active">
+		<a href="{% url 'index' %}">Главная</a>
+	</li>
+	<li class="active">
+		<a href="{% url 'sites:info' %}">Info</a>
+	</li>
 {% endblock %}
 
 {% block content %}
+<style>
+	.center_menu{
+	text-align : left;
+	}
+</style>
+
         <div class="section">
 	    	<div class="container">
 				<div class="row">
@@ -22,4 +33,5 @@
 				</div>
 			</div>
 		</div>
+
 {% endblock %}

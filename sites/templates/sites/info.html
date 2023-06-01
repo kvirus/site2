@@ -1,0 +1,27 @@
+{% extends 'sites/base.html' %}
+
+{% block menu %}
+	<li class="active">
+		<a href="{% url 'index' %}">Главная</a>
+	</li>
+	<li class="active">
+		<a href="{% url 'sites:info' %}">Info</a>
+	</li>
+{% endblock %}
+
+{% block content %}
+<style>
+	.center_txt{
+	text-align : left;
+	text-indent : 150px ;
+	}
+</style>
+<div class = "center_txt"><h4><b>Вход на удаленный стол (RDP Терминал): dd.okna-zeon.ru:49988 или 92.241.17.41:49988</b></h4><br><br></div>
+
+<div class = "center_txt"><h4><b>Вход на удаленный стол (RDP 1С): dd.okna-zeon.ru:49986 или 92.241.17.41:49986</b></h4><br><br></div>
+
+<div class = "center_txt"><h4><b>Вход на удаленный стол (RDP HOST): dd.okna-zeon.ru:49901 или 92.241.17.41:49901</b></h4><br><br></div>
+
+<div class = "center_txt"><h4><b>Вход на удаленный стол (RDP BCP PC): dd.okna-zeon.ru:49900 или 92.241.17.41:49900</b></h4><br><br></div>
+
+{% endblock %}

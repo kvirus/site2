@@ -25,10 +25,6 @@
         <script src="{% static 'js/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
 
         <!-- Navigation & Logo-->
         <div class="mainmenu-wrapper">
@@ -49,12 +45,10 @@
 		        </div>
 		        <nav id="mainmenu" class="mainmenu">
 					<ul>
-						<li class="logo-wrapper"><a href="index.html"><img src="{% static 'img/mPurpose-logo.png' %}" alt="Multipurpose Twitter Bootstrap Template"></a></li>
+						<li class="logo-wrapper"><a href="{% url 'index' %}"><img src="{% static 'img/mPurpose-logo.png' %}" alt="Multipurpose Twitter Bootstrap Template"></a></li>
 								{% block menu %}
 								{% endblock %}
-						<li class="active">
-							<a href="{% url 'index' %}">Главная</a>
-						</li>
+
 						<li class="has-submenu">
 							<div class="mainmenu-submenu">
 								<div class="mainmenu-submenu-inner">
@@ -76,15 +70,7 @@
 										</ul>
 									</div>
 									<div>
-										<h4>Our Work (Portfolio)</h4>
-										<ul>
-											<li><a href="page-portfolio-2-columns-1.html">Portfolio (2 Columns, Option 1)</a></li>
-											<li><a href="page-portfolio-2-columns-2.html">Portfolio (2 Columns, Option 2)</a></li>
-											<li><a href="page-portfolio-3-columns-1.html">Portfolio (3 Columns, Option 1)</a></li>
-											<li><a href="page-portfolio-3-columns-2.html">Portfolio (3 Columns, Option 2)</a></li>
-											<li><a href="page-portfolio-item.html">Portfolio Item (Project) Description</a></li>
-										</ul>
-										<h4>General Pages</h4>
+
 										<ul>
 											<li><a href="page-about-us.html">About Us</a></li>
 											<li><a href="page-contact-us.html">Contact Us</a></li>
@@ -142,8 +128,7 @@
         <!-- End Homepage Slider -->
 
 		<!-- Press Coverage -->
-		{% block content %}
-		{% endblock %}
+
 		<!-- Press Coverage -->
 
 		<!-- Services -->
@@ -158,7 +143,8 @@
 
 
 
-
+		{% block content %}
+		{% endblock %}
 
     </body>
 </html>
