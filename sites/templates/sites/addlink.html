@@ -1,16 +1,6 @@
 {% extends 'sites/base.html' %}
 
-{% block menu %}
-	<li class="active">
-		<a href="{% url 'index' %}">Главная</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'sites:info' %}">Info</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'sites:addlink' %}">addlink</a>
-	</li>
-{% endblock %}
+
 
 {% block content %}
 
@@ -25,9 +15,14 @@
 				<div class="row">
 					<div class="col-md-11">
 						<div class="service-wrapper">
-
-
 							{% if request.user.is_authenticated %}
+								<form method="post">
+									{% csrf_token %}
+									{{ form.title }}<br>
+									{{ form.link }}
+									<button type="submit">Отправить</button>
+									<span>{{ error }}</span>
+								</form>
 
 							{% else %}
 								<h3>Необходимо зерегистрироваться</h3>

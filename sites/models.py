@@ -4,5 +4,13 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
-#class User(AbstractUser):
- #   image = models.ImageField(upload_to='users_images', blank=True)
+class add_links(models.Model):
+    title = models.CharField('Название', max_length=30)
+    link = models.CharField('Ссылка', max_length=250)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Ссылка'
+        verbose_name_plural = 'Ссылки'

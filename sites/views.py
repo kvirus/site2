@@ -7,6 +7,7 @@ from django.apps import apps
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from .forms import *
 
 import paramiko
 
@@ -24,6 +25,24 @@ from sites.forms import LoginForm
 
 def index(request):
     return render(request, 'sites/index.html')
+
+def menu(request):
+    return render(request, 'sites/menu.html')
+
+def addlink(request):
+    error = ''
+    if request.method =='POST':
+        form = addlinkForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = 'Форма не верная'
+    form = addlinkForm()
+    data = {
+        'form':form,
+        'error': error
+    }
+    return render(request, 'sites/addlink.html', data)
 
 #def login(request):
  #   return render(request, 'sites/login.html')

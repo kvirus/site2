@@ -17,6 +17,8 @@ urlpatterns =[
     path('close_mik/', close_mik, name='close_mik'),
     path('rules/', rules, name='rules'),
     path('info/', info, name='info'),
+    path('menu/', menu, name='menu'),
+    path('addlink/', addlink, name='addlink'),
 
 ]
 
