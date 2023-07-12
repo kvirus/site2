@@ -1,8 +1,9 @@
 {% extends 'sites/base.html' %}
 
 {% block menu %}
-
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -18,13 +19,19 @@
 					<div class="col-md-11">
 						<div class="service-wrapper">
 							{% if request.user.is_authenticated %}
-								<h3><a href="{% url 'sites:rules' %}">Все правила</a></h3>
-							{% else %}
-								<h3>Необходимо войти на сайт</h3>
-									<div class="color_blue">
+								<form method="post">
+									{% csrf_token %}
+									{{ form.title }}<br>
+									{{ form.phone }}<br>
+									{{ form.job }}<br>
+									{{ form.mail }}<br>
+									{{ form.photo }}<br>
+									<button type="submit">Отправить</button>
+									<span>{{ error }}</span>
+								</form>
 
-										<a href="{% url 'sites:login' %}"><div class="color_blue">Войти</div></a></li>
-									</div>
+							{% else %}
+								<h3>Необходимо зерегистрироваться</h3>
 							{% endif %}
 						</div>
 					</div>

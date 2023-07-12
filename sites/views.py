@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .forms import *
+from  .models import *
+from django.db.models import Q
 
 import paramiko
 
@@ -24,10 +26,50 @@ from sites.forms import LoginForm
 
 
 def index(request):
-    return render(request, 'sites/index.html')
+    links = add_links.objects.all()
+    return render(request, 'sites/index.html', {"links": links})
+
+def phones(request):
+    links_phone = phone.objects.all()
+    result =''
+    # Форма поиска
+    form = SearchForm(request.GET or None)
+    search = []
+    if form.is_valid():
+        search_query = form.cleaned_data['search_query']
+        search = phone.objects.filter(Q(title__icontains=search_query)|Q(phone__icontains=search_query)|Q(job__icontains=search_query)|Q(mail__icontains=search_query))
+    #Сохранение фото
+    form1 = PhotoImg(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form1.is_valid():
+            form1.save()
+            return redirect('product_list')
+        else:
+            form1 = ProductForm()
+    return render(request, 'sites/phone.html', {"links_phone": links_phone, 'form':form,'form1':form1, 'search':search})
+
+# def menu(request):
+#     links_menu = menu_bd.objects.all()
+#     return render(request, 'sites/menu.html',{"links_menu": links_menu})
 
 def menu(request):
-    return render(request, 'sites/menu.html')
+    links = add_links.objects.all()
+    return render(request, 'sites/menu.html',{"links": links})
+
+def add_phone(request):
+    error = ''
+    if request.method == 'POST':
+        form = addPhone(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = 'Форма не верная'
+    form = addPhone()
+    data = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'sites/add_phone.html', data)
 
 def addlink(request):
     error = ''
@@ -35,26 +77,49 @@ def addlink(request):
         form = addlinkForm(request.POST)
         if form.is_valid():
             form.save()
+            print(form.cleaned_data)
         else:
             error = 'Форма не верная'
     form = addlinkForm()
     data = {
         'form':form,
-        'error': error
+        'error': error,
     }
     return render(request, 'sites/addlink.html', data)
+
+
+
 
 #def login(request):
  #   return render(request, 'sites/login.html')
 
 def base(request):
-    return render(request, 'sites/base.html')
+    links_menu = menu_bd.objects.all()
+    return render(request, 'sites/base.html',{"links_menu": links_menu})
+
+def menus(request):
+    return render(request, 'sites/menus.html')
+
+def def_test(request):
+    sum = ''
+    if request.method == 'POST':
+        my_field_value = int(request.POST.get('my_field'))
+        sum = 4 + my_field_value
+        print(sum)
+        if  my_field_value == 5:
+            return redirect('index')
+    else:
+        my_field_value = None
+    return render(request, 'sites/def_test.html', {'my_field': my_field_value, 'sum' : sum })
 
 def rules(request):
     return render(request, 'sites/rules.html')
 
 def info(request):
     return render(request, 'sites/info.html')
+
+# def phone(request):
+#     return render(request, 'sites/phone.html')
 
 
 def open_1c (request): #Открыть правило для 1С SQL снаружи
@@ -98,6 +163,15 @@ def close_mik (request): #Закрыть правило для mikrotik снар
     except Exception:
         return render(request, 'sites/error.html')
 
+def mik_res (request): #Перезагрузка MIkrotik
+    try:
+        client.connect(hostname='10.100.2.1', port=6666, username="bka", password=passwd, look_for_keys=False,
+                       allow_agent=False)
+        _stdin, _stdout, _stderr = client.exec_command('system reboot')
+        return render(request, 'sites/return.html')
+        #return HttpResponse("Выполнено")
+    except Exception:
+        return render(request, 'sites/error.html')
 
 # def login_view(request):
 #     if request.method == 'POST':

@@ -1,12 +1,7 @@
 {% extends 'sites/base.html' %}
 
 {% block menu %}
-	<li class="active">
-		<a href="{% url 'index' %}">Главная</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'sites:info' %}">Info</a>
-	</li>
+
 {% endblock %}
 
 {% block content %}
@@ -23,5 +18,6 @@
 <div class = "center_txt"><h4><b>Вход на удаленный стол (RDP HOST): dd.okna-zeon.ru:49901 или 92.241.17.41:49901</b></h4><br><br></div>
 
 <div class = "center_txt"><h4><b>Вход на удаленный стол (RDP BCP PC): dd.okna-zeon.ru:49900 или 92.241.17.41:49900</b></h4><br><br></div>
+
 
 {% endblock %}

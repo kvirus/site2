@@ -1,4 +1,5 @@
 {% load static %}
+{% load get_group %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -21,96 +22,78 @@
 		    <link rel="stylesheet" href="{% static 'css/leaflet.ie.css' %}" />
 		<![endif]-->
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
-
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
         <script src="{% static 'js/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
     </head>
     <body>
 
         <!-- Navigation & Logo-->
         <div class="mainmenu-wrapper">
-	        <div class="container">
+	        <div >
 	        	<div class="menuextras">
 					<div class="extras">
+
 						<ul>
+							<li><img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" style="max-height: 50px; max-width: 50px;"></li>
 		        		<li>{% if request.user.is_authenticated %}
+
+
 							<h4>Вы вошли как <b>{{ user.username }}</b></h4>
+							<h4><b>Привет {{ user.first_name }}</b></h4>
+							<h4><b>{{ user.date_joined }}</b></h4>
 							{% else %}
-							<a href="{% url 'sites:login' %}"><h4>Войти</h4></a></li>
+							<a href="{% url 'sites:login' %}"><h4><b>Войти</b></h4></a></li>
 							{% endif %}
 							{% if request.user.is_authenticated %}
-							<li><a href="{% url 'sites:logout' %}"><h4>Выйти</h4></a></li>
+							<li><a href="{% url 'sites:logout' %}"><h4><b>Выйти</b></h4></a></li>
 							{% endif %}
 			        	</ul>
 					</div>
 		        </div>
+				<!-- <nav id="mainmenu" class="mainmenu">-->
 		        <nav id="mainmenu" class="mainmenu">
 					<ul>
 						<li class="logo-wrapper"><a href="{% url 'index' %}"><img src="{% static 'img/mPurpose-logo.png' %}" alt="Multipurpose Twitter Bootstrap Template"></a></li>
 								{% block menu %}
 								{% endblock %}
+						{% if request.user.is_authenticated %}
+							<li class="active">
+								<a href="{% url 'index' %}">Главная</a>
+							</li>
+							<li class="active">
+								<a href="{% url 'sites:info' %}">Info</a>
+							</li>
+						<li class="active">
+								<a href="{% url 'sites:phones' %}">Справочник</a>
+							</li>
+						{% if request.user|has_group:"admin" %}
 
-						<li class="has-submenu">
-							<div class="mainmenu-submenu">
-								<div class="mainmenu-submenu-inner">
-									<div>
-										<h4>Homepage</h4>
-										<ul>
-											<li><a href="index.html">Homepage (Sample 1)</a></li>
-											<li><a href="page-homepage-sample.html">Homepage (Sample 2)</a></li>
-										</ul>
-										<h4>Services & Pricing</h4>
-										<ul>
-											<li><a href="page-pricing.html">Pricing Table</a></li>
-										</ul>
-										<h4>Team & Open Vacancies</h4>
-										<ul>
-											<li><a href="page-team.html">Our Team</a></li>
-											<li><a href="page-vacancies.html">Open Vacancies (List)</a></li>
-											<li><a href="page-job-details.html">Open Vacancies (Job Details)</a></li>
-										</ul>
-									</div>
-									<div>
+							<li class="active">
+								<a href="{% url 'sites:menu' %}">Ссылки</a>
+							</li>
+													<li class="active">
+								<a href="{% url 'sites:rules' %}">Все правила</a>
+							</li>
+						    <li class="active">
+								<a href="{% url 'sites:add_phone' %}">Добавить телефон</a>
+							</li>
+													<li class="active">
+								<a href="{% url 'sites:addlink' %}">Добавить ссылку</a>
+							</li>
+							</li>
+							<li class="active">
+								<a href="{% url 'sites:def_test' %}">Тест данные</a>
+							</li>
+						{% endif %}
 
-										<ul>
-											<li><a href="page-about-us.html">About Us</a></li>
-											<li><a href="page-contact-us.html">Contact Us</a></li>
-											<li><a href="page-faq.html">Frequently Asked Questions</a></li>
-											<li><a href="page-testimonials-clients.html">Testimonials & Clients</a></li>
-											<li><a href="page-events.html">Events</a></li>
-											<li><a href="page-404.html">404 Page</a></li>
-											<li><a href="page-sitemap.html">Sitemap</a></li>
-											<li><a href="page-login.html">Login</a></li>
-											<li><a href="page-register.html">Register</a></li>
-											<li><a href="page-password-reset.html">Password Reset</a></li>
-											<li><a href="page-terms-privacy.html">Terms & Privacy</a></li>
-											<li><a href="page-coming-soon.html">Coming Soon</a></li>
-										</ul>
-									</div>
-									<div>
-										<h4>eShop</h4>
-										<ul>
-											<li><a href="page-products-3-columns.html">Products listing (3 Columns)</a></li>
-											<li><a href="page-products-4-columns.html">Products listing (4 Columns)</a></li>
-											<li><a href="page-products-slider.html">Products Slider</a></li>
-											<li><a href="page-product-details.html">Product Details</a></li>
-											<li><a href="page-shopping-cart.html">Shopping Cart</a></li>
-										</ul>
-										<h4>Blog</h4>
-										<ul>
-											<li><a href="page-blog-posts.html">Blog Posts (List)</a></li>
-											<li><a href="page-blog-post-right-sidebar.html">Blog Single Post (Right Sidebar)</a></li>
-											<li><a href="page-blog-post-left-sidebar.html">Blog Single Post (Left Sidebar)</a></li>
-											<li><a href="page-news.html">Latest & Featured News</a></li>
-										</ul>
-									</div>
-								</div><!-- /mainmenu-submenu-inner -->
-							</div><!-- /mainmenu-submenu -->
+						{% endif %}
+
 						</li>
 						<!-- <li>
 							<a href="credits.html">Credits</a>
 						</li> -->
 					</ul>
-				</nav>
+
 			</div>
 		</div>
 

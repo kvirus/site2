@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from sites.views import index
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -23,3 +25,5 @@ urlpatterns = [
     path('sites/', include('sites.urls', namespace = 'sites')),
     path('',index, name = 'index'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

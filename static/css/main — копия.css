@@ -28,7 +28,12 @@ body {
 .section-white {
   background: #FFF;
 }
-
+.section .container:first-child h1,
+.section .container:first-child h2,
+.section .container:first-child h3 {
+  margin-top: 0;
+  font-weight: 700;
+}
 .input-micro {
   width: 50px;
   margin-bottom: 0 !important;
@@ -2409,8 +2414,8 @@ span.color-red {
 }
 .mainmenu > ul > li > a,
 .mainmenu .mainmenu-submenu-inner > li > a {
-  font-size: 1em;
-  padding: 1em 1em;
+  font-size: 1.2em;
+  padding: 1.2em 1.5em;
   color: #999;
   display: inline-block;
   text-decoration: none;

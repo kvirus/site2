@@ -1,0 +1,9 @@
+{% extends 'sites/base.html' %}
+{% block content %}
+								<form method="post"><br><br>
+  								{% csrf_token %}
+  								<input type="text" name="my_field" id="my_field_id" value="Введите данные">
+  									<button type="submit">Submit</button>
+								</form>
+								{{ sum }}
+{% endblock %}

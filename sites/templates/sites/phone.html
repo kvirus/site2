@@ -1,0 +1,64 @@
+{% extends 'sites/base.html' %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+
+<div class="section">
+	    	<div class="container">
+				<div class="row">
+					<div class="col-md-11">
+						<div class="service-wrapper">
+
+								<table border="1" bordercolor="grey" width="800" align="center">
+								<tr><th align="center">ФИО</th>
+									<th align="center">Телефон</th>
+									<th align="center">Должность</th>
+									<th align="center">Почта</th>
+								</tr> <!--ряд с ячейками заголовков-->
+									{% for link in links_phone %}
+										<tr><td>{{ link.title }}</td>
+											<td>{{ link.phone }}</td>
+											<td>{{ link.job }}</td>
+											<td>{{ link.mail }}</td>
+											<td>
+											{% if link.photo %}
+    											<img src="{{ link.photo.url }}" alt="Product Image">
+											{% endif %}
+											</td>
+										</tr> <!--ряд с ячейками тела таблицы-->
+									{% endfor %}
+									<!--Поиск-->
+								</table>
+
+
+							<form  method="GET">
+								{% csrf_token %}
+							<h1>Поиск</h1>
+							<form method="get">
+								{{ form.as_p }}	<button type="submit">Поиск</button>
+							</form>
+							{% if search %}
+								<ul>
+									{% for searc in search %}
+										<b>{{ searc.title }} {{ searc.phone }}  {{ searc.job }}  {{ searc.mail }}
+											<img src="{{ searc.photo.url }}" alt="Изображение">
+										<br> <br></b>
+									{% endfor %}
+								</ul>
+							{% endif %}
+
+							</form>
+
+								{% for results in result %}
+  									<h2>{{ result.title }}</h2>
+  									<p>{{ result.phone }}</p>
+								{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

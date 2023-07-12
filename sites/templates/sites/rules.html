@@ -1,13 +1,8 @@
-<{% extends 'sites/base.html' %}
+{% extends 'sites/base.html' %}
 {% load get_group %}
 
 {% block menu %}
-	<li class="active">
-		<a href="{% url 'index' %}">Главная</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'index' %}">Info</a>
-	</li>
+
 {% endblock %}
 
 {% block content %}
@@ -25,23 +20,25 @@
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
-							{% if request.user|has_group:"admin" %}
-                            Видна только ADMIN
-							<h3>Правила Микротика</h3>
-							<a href="{% url 'sites:open_mik' %}" class="btn">Открыть снаружи</a><br> <br>
-							<a href="{% url 'sites:close_mik' %}" class="btn">Закрыть снаружи</a><br> <br>
-							{% endif %}
+								{% if request.user|has_group:"admin" %}
+									 <!--<!Видно только ADMIN-->
+									<h3>Правила Микротика</h3>
+									<a href="{% url 'sites:open_mik' %}" class="btn">Открыть снаружи</a><br> <br>
+									<a href="{% url 'sites:close_mik' %}" class="btn">Закрыть снаружи</a><br> <br>
+									<a href="{% url 'sites:mik_res' %}" class="btn">Перезагрузка Mikrotik</a><br> <br>
+								{% endif %}
+
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="service-wrapper">
 							{% if request.user|has_group:"admin" %}
-							 Видно только ADMIN
-							<h3>Остальное</h3>
-							<a href="#" class="btn">Открыть к ПК бекап</a><br> <br>
-							<a href="#" class="btn">Закрыть ПК бекап</a><br> <br>
-							<a href="#" class="btn">Открыть основной хост</a><br> <br>
-							<a href="#" class="btn">Закрыть основной хост</a>
+								 <!--<!Видно только ADMIN-->
+									<h3>Остальное</h3>
+									<a href="#" class="btn">Открыть к ПК бекап</a><br> <br>
+									<a href="#" class="btn">Закрыть ПК бекап</a><br> <br>
+									<a href="#" class="btn">Открыть основной хост</a><br> <br>
+									<a href="#" class="btn">Закрыть основной хост</a>
 							{% endif %}
 						</div>
 					</div>

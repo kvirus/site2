@@ -1,13 +1,34 @@
 {% extends 'sites/base.html' %}
 
 {% block menu %}
-	<li class="active">
-		<a href="{% url 'index' %}">Главная</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'sites:info' %}">Info</a>
-	</li>
-	<li class="active">
-		<a href="{% url 'sites:info' %}">Info</a>
-	</li>
+
+{% endblock %}
+
+{% block content %}
+<style>
+	.center_txt{
+	text-align : left;
+	text-indent : 150px ;
+	}
+</style>
+<div class="section">
+	    	<div class="container">
+				<div class="row">
+					<div class="col-md-11">
+						<div class="service-wrapper">
+						{% for link in links %}
+							<div class="center_txt">
+							<h3><li class="active">
+								<a href="{{ link.link }}">{{ link.title }} </a>
+							</li></h3>
+							</div>
+						{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 {% endblock %}
