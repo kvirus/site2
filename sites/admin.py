@@ -28,28 +28,28 @@ class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
     form = ProfileForm
 
-    def save_model(self, request, obj, form, change):
-        """Сохранить расширенную модель профиля"""
-        if obj.pk is None:
-            obj.save()
-            profile = Profile(user=obj)
-            profile.save()
-        else:
-            obj.save()
+    # def save_model(self, request, obj, form, change):
+    #     """Сохранить расширенную модель профиля"""
+    #     if obj.pk is None:
+    #         obj.save()
+    #         profile = Profile(user=obj)
+    #         profile.save()
+    #     else:
+    #         obj.save()
 
-    def get_thumbnail_html(self, obj):
-        thumbnail_url = obj.profile.avatar.url if obj.profile.avatar else None
-        if thumbnail_url:
-            return mark_safe(f"<img src='{thumbnail_url}' width: 50px>")
-        return ''
+    # def get_thumbnail_html(self, obj):
+    #     thumbnail_url = obj.profile.avatar.url if obj.profile.avatar else None
+    #     if thumbnail_url:
+    #         return mark_safe(f"<img src='{thumbnail_url}' width: 50px>")
+    #     return ''
 
-    def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('profile')
+    # def get_queryset(self, request):
+    #     return super().get_queryset(request).prefetch_related('profile')
+    #
+    # get_thumbnail_html.short_description = 'Thumbnail'
+    # get_thumbnail_html.allow_tags = True
 
-    get_thumbnail_html.short_description = 'Thumbnail'
-    get_thumbnail_html.allow_tags = True
-
-    list_display = ['username','email', 'first_name', 'last_name', 'get_thumbnail_html']
+    list_display = ['username','email', 'first_name', 'last_name']
 
     ordering = ['first_name', 'last_name', 'username']
 
