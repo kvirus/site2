@@ -6,7 +6,7 @@ from .models import Profile
 from .forms import ProfileForm
 from django.utils.safestring import mark_safe
 from django.db.models import ImageField
-
+from django.shortcuts import render, redirect
 
 # Register your models here.
 
@@ -28,28 +28,31 @@ class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
     form = ProfileForm
 
-    # def save_model(self, request, obj, form, change):
-    #     """Сохранить расширенную модель профиля"""
-    #     if obj.pk is None:
-    #         obj.save()
-    #         profile = Profile(user=obj)
-    #         profile.save()
-    #     else:
-    #         obj.save()
+    def save_model(self, request, obj, form, change):
+        """Сохранить расширенную модель профиля"""
+        if obj.pk is None:
+            obj.save()
+            profile = Profile(user=obj)
+            profile.save()
+        else:
+            obj.save()
 
-    # def get_thumbnail_html(self, obj):
-    #     thumbnail_url = obj.profile.avatar.url if obj.profile.avatar else None
-    #     if thumbnail_url:
-    #         return mark_safe(f"<img src='{thumbnail_url}' width: 50px>")
-    #     return ''
+    def get_thumbnail_html(self, obj):
+        thumbnail_url = obj.profile.avatar.url if obj.profile.avatar else None
+        if thumbnail_url:
+            return mark_safe(f"<img src='{thumbnail_url}' width: 50px>")
+        return ''
 
-    # def get_queryset(self, request):
-    #     return super().get_queryset(request).prefetch_related('profile')
-    #
-    # get_thumbnail_html.short_description = 'Thumbnail'
-    # get_thumbnail_html.allow_tags = True
+    def nick_name(self, obj):
+        thumbnail_url = obj.profile.nick
+        return thumbnail_url
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('profile')
 
-    list_display = ['username','email', 'first_name', 'last_name']
+    get_thumbnail_html.short_description = 'Thumbnail'
+    get_thumbnail_html.allow_tags = True
+
+    list_display = ['username','email', 'first_name', 'last_name', 'is_active','nick_name']
 
     ordering = ['first_name', 'last_name', 'username']
 
