@@ -1,0 +1,21 @@
+{% extends 'sites/base.html' %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<p>Добро пожаловать, {{ user.username }}!</p>
+
+<form method="post" action="{% url 'sites:profile' %}">
+    {{ profile.first_name1 }}
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form.first_name1 }}
+    <button type="submit">Сохранить</button>
+</form>
+
+
+{% endblock %}

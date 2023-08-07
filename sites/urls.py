@@ -26,6 +26,7 @@ urlpatterns =[
     path('phones/', phones, name='phones'),
     path('add_phone/', add_phone, name='add_phone'),
     path('def_test/', def_test, name='def_test'),
+    path('profile/', profile, name='profile'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

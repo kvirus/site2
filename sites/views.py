@@ -10,6 +10,8 @@ from django.shortcuts import redirect
 from .forms import *
 from  .models import *
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 
 import paramiko
 
@@ -206,3 +208,17 @@ class CustomLoginView(LoginView):
 def logout_exit(request):
     logout(request)
     return redirect('index')
+
+@login_required
+def profile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request,'sites/profile.html', {'user': user, 'profile': profile,'form': form},)

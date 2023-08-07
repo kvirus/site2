@@ -55,6 +55,8 @@ class PhotoImg(forms.ModelForm):
 
 #Расширение стандарной модели админки
 class ProfileForm(forms.ModelForm):
+    first_name1 = forms.CharField(widget=forms.TextInput(attrs={'class' : 'menuextras'}))
+
     class Meta:
         model = Profile
-        fields = ['avatar']
+        fields = ['avatar', 'first_name1', 'last_name1']

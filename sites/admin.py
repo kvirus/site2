@@ -53,5 +53,6 @@ class UserAdmin(BaseUserAdmin):
 
     ordering = ['first_name', 'last_name', 'username']
 
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+#admin.site.unregister(User)
+admin.site.register(Profile)
+#admin.site.register(User, UserAdmin)
